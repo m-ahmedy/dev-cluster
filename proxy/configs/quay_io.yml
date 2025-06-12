@@ -1,0 +1,8 @@
+http:
+  addr: :5001
+proxy:
+  remoteurl: https://quay.io
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+version: 0.1

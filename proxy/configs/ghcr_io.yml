@@ -1,0 +1,8 @@
+http:
+  addr: :5002
+proxy:
+  remoteurl: https://ghcr.io
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+version: 0.1

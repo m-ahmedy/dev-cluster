@@ -1,0 +1,81 @@
+version: '3.9'
+services:
+  docker_io_registry:
+    image: registry:2
+    restart: always
+    network_mode: host
+    volumes:
+    - docker_io_registry_cache:/var/lib/registry
+    - ./configs/docker_io.yml:/etc/docker/registry/config.yml:ro
+  quay_io_registry:
+    image: registry:2
+    restart: always
+    network_mode: host
+    volumes:
+    - quay_io_registry_cache:/var/lib/registry
+    - ./configs/quay_io.yml:/etc/docker/registry/config.yml:ro
+  ghcr_io_registry:
+    image: registry:2
+    restart: always
+    network_mode: host
+    volumes:
+    - ghcr_io_registry_cache:/var/lib/registry
+    - ./configs/ghcr_io.yml:/etc/docker/registry/config.yml:ro
+  gcr_io_registry:
+    image: registry:2
+    restart: always
+    network_mode: host
+    volumes:
+    - gcr_io_registry_cache:/var/lib/registry
+    - ./configs/gcr_io.yml:/etc/docker/registry/config.yml:ro
+  registry_k8s_io_registry:
+    image: registry:2
+    restart: always
+    network_mode: host
+    volumes:
+    - registry_k8s_io_registry_cache:/var/lib/registry
+    - ./configs/registry_k8s_io.yml:/etc/docker/registry/config.yml:ro
+  cr_l5d_io_registry:
+    image: registry:2
+    restart: always
+    network_mode: host
+    volumes:
+    - cr_l5d_io_registry_cache:/var/lib/registry
+    - ./configs/cr_l5d_io.yml:/etc/docker/registry/config.yml:ro
+volumes:
+  docker_io_registry_cache:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/docker.io
+  quay_io_registry_cache:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/quay.io
+  ghcr_io_registry_cache:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/ghcr.io
+  gcr_io_registry_cache:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/gcr.io
+  registry_k8s_io_registry_cache:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/registry.k8s.io
+  cr_l5d_io_registry_cache:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/cr.l5d.io

@@ -1,0 +1,58 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: dev-cluster
+agents: 3
+servers: 3
+ports:
+  - port: "9080:80"
+    nodeFilters:
+      - "loadbalancer"
+  - port: "9443:443"
+    nodeFilters:
+      - "loadbalancer"
+
+# volumes:
+#   - volume: k3s-snapshots-db:/var/lib/rancher/k3s/server/db
+#     nodeFilters:
+#       - server:0
+
+options:
+  k3s:
+    extraArgs:
+      - arg: "--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%"
+        nodeFilters:
+          - "agent:*"
+          - "server:*"
+      - arg: "--etcd-snapshot-schedule-cron='0/30 * * * *'"
+        nodeFilters:
+          - "server:0"
+      - arg: "--etcd-snapshot-retention=1"
+        nodeFilters:
+          - "server:0"
+      - arg: "--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%"
+        nodeFilters:
+          - "agent:*"
+          - "server:*"
+      - arg: "--disable=traefik"
+        nodeFilters:
+          - "server:*"
+      - arg: "--node-label=ingress-ready=true"
+        nodeFilters:
+          - "server:*"
+
+registries:
+  config: |
+    mirrors:
+      "docker.io":
+        endpoint: ["http://172.17.0.1:5000"]
+      "quay.io":
+        endpoint: ["http://172.17.0.1:5001"]
+      "gcr.io":
+        endpoint: ["http://172.17.0.1:5003"]
+      "ghcr.io":
+        endpoint: ["http://172.17.0.1:5002"]
+      "registry.k8s.io":
+        endpoint: ["http://172.17.0.1:5004"]
+      "cr.l5d.io":
+        endpoint: ["http://172.17.0.1:5005"]

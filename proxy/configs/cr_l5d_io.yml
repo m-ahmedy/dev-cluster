@@ -1,0 +1,8 @@
+http:
+  addr: :5005
+proxy:
+  remoteurl: https://cr.l5d.io
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+version: 0.1

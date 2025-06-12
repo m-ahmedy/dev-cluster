@@ -1,0 +1,8 @@
+http:
+  addr: :5004
+proxy:
+  remoteurl: https://registry.k8s.io
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+version: 0.1

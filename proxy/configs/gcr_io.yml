@@ -1,0 +1,8 @@
+http:
+  addr: :5003
+proxy:
+  remoteurl: https://gcr.io
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+version: 0.1
