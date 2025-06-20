@@ -12,10 +12,8 @@ ports:
     nodeFilters:
       - "loadbalancer"
 
-# volumes:
-#   - volume: k3s-snapshots-db:/var/lib/rancher/k3s/server/db
-#     nodeFilters:
-#       - server:0
+volumes:
+  - volume: /etc/machine-id:/etc/machine-id
 
 options:
   k3s:
