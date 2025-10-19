@@ -1,30 +1,7 @@
 #!/bin/bash
 
-# Ensure registry data directory exists and has proper permissions
-
-pushd $PWD/proxy
-
-echo "🐳 Starting universal registry proxy..."
-
-docker compose down
-
-sudo rm -rf configs
-python generate.py
-
-docker compose up -d
-popd 
-
-# Create k3d cluster
-
-pushd $PWD/k3d
-
-echo "🏗️ Creating k3d cluster with universal proxy..."
-
-k3d cluster delete dev-cluster 2>/dev/null || true
-
-k3d cluster create --config k3d-dev-cluster.yaml
-
-popd
+./setup-proxy.sh
+./setup-kind-cluster.sh
 
 echo "✅ Setup complete!"
 echo ""

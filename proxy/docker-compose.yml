@@ -42,6 +42,13 @@ services:
     volumes:
     - cr_l5d_io_registry_cache:/var/lib/registry
     - ./configs/cr_l5d_io.yml:/etc/docker/registry/config.yml:ro
+  cr_fluentbit_io_registry:
+    image: registry:2
+    restart: always
+    network_mode: host
+    volumes:
+    - cr_fluentbit_io_registry_cache:/var/lib/registry
+    - ./configs/cr_fluentbit_io.yml:/etc/docker/registry/config.yml:ro
 volumes:
   docker_io_registry_cache:
     driver: local
@@ -79,3 +86,9 @@ volumes:
       type: none
       o: bind
       device: ./data/cr.l5d.io
+  cr_fluentbit_io_registry_cache:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/cr.fluentbit.io

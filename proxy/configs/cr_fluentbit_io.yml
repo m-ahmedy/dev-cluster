@@ -1,0 +1,8 @@
+http:
+  addr: :5006
+proxy:
+  remoteurl: https://cr.fluentbit.io
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+version: 0.1

@@ -4,5 +4,6 @@
   "ghcr.io": "https://ghcr.io",
   "gcr.io": "https://gcr.io",
   "registry.k8s.io": "https://registry.k8s.io",
-  "cr.l5d.io": "https://cr.l5d.io"
+  "cr.l5d.io": "https://cr.l5d.io",
+  "cr.fluentbit.io": "https://cr.fluentbit.io"
 }

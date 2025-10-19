@@ -18,23 +18,6 @@ volumes:
 options:
   k3s:
     extraArgs:
-      - arg: "--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%"
-        nodeFilters:
-          - "agent:*"
-          - "server:*"
-      - arg: "--etcd-snapshot-schedule-cron='0/30 * * * *'"
-        nodeFilters:
-          - "server:0"
-      - arg: "--etcd-snapshot-retention=1"
-        nodeFilters:
-          - "server:0"
-      - arg: "--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%"
-        nodeFilters:
-          - "agent:*"
-          - "server:*"
-      - arg: "--disable=traefik"
-        nodeFilters:
-          - "server:*"
       - arg: "--node-label=ingress-ready=true"
         nodeFilters:
           - "server:*"
